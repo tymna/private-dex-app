@@ -1,0 +1,14 @@
+{
+  "amm-AMM.json": {
+    "contractName": "AMM",
+    "hash": "4059ad8cd46ac35149ff6e543cf9c1516be88ea2d8754e7021442b885e97e54f"
+  },
+  "lp_token-LiquidityToken.json": {
+    "contractName": "LiquidityToken",
+    "hash": "f957ad3bfd72e0b459af1d695cf8ee6f626bafbd613f006d4dc2b56a1741ceeb"
+  },
+  "token_contract-Token.json": {
+    "contractName": "Token",
+    "hash": "bdd809313e6cbf0c1e22b12263ba47b4bbf8df735d16289dc50b29089795f617"
+  }
+}

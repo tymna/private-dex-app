@@ -1,0 +1,2 @@
+[workspace]
+members = ["amm", "lp_token"]

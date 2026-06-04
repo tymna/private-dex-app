@@ -1,0 +1,10 @@
+[package]
+name = "amm"
+type = "contract"
+authors = [""]
+
+[dependencies]
+aztec = { git = "https://github.com/AztecProtocol/aztec-packages/", tag = "v4.3.0", directory = "noir-projects/aztec-nr/aztec" }
+uint_note = { git = "https://github.com/AztecProtocol/aztec-packages/", tag = "v4.3.0", directory = "noir-projects/aztec-nr/uint-note" }
+token = { git = "https://github.com/defi-wonderland/aztec-standards", tag = "prerelease-6b0da0c", directory = "src/token_contract" }
+lp_token = { path = "../lp_token" }
