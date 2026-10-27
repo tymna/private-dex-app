@@ -55,7 +55,7 @@ make deploy         # import test accounts + deploy everything + shield into tes
 
 1. `accounts` — register the sandbox's prefunded test accounts
 2. `deploy-token0` / `deploy-token1` — mint initial supply to test0's public balance
-3. `deploy-amm` — `constructor(token0, token1, fee_rate=3000)`, its `lp_token` slot left empty
+3. `deploy-amm` — `constructor(token0, token1, fee_rate=30)` (0.3%), its `lp_token` slot left empty
 4. `deploy-lptoken` — deploy the lp_token with the AMM as minter
 5. `set-lptoken` — `amm.set_lp_token(...)` fills the AMM's empty slot; it asserts the AMM really is the lp_token's minter, so bad wiring fails loudly
 6. `to-private` — shield both tokens from test0's public balance into its private balance

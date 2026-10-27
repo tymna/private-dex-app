@@ -78,7 +78,7 @@ deploy-amm:
 	out=$$(aztec-wallet deploy target/amm-AMM.json \
 		--from accounts:test0 \
 		--init constructor \
-		--args contracts:token0 contracts:token1 3000 \
+		--args contracts:token0 contracts:token1 30 \
 		--alias amm --salt 0x3 2>&1); \
 	printf '%s\n' "$$out"; \
 	addr=$$(printf '%s\n' "$$out" | grep -oE '0x[0-9a-fA-F]{60,}' | tail -1 || true); \
