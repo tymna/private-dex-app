@@ -38,3 +38,20 @@ unconstrained fn test_set_lp_token_only_admin() {
     let amm = AMM::at(amm_address);
     env.call_public(user, amm.set_lp_token(lp_token_address));
 }
+
+// fee_rate is parts-per-10000, so 10000 (100%) is the max the constructor accepts.
+#[test]
+unconstrained fn test_constructor_max_fee_rate() {
+    let (mut env, _owner, _user, amm_address, _token0_address, _token1_address, _lp_token_address) =
+        utils::deploy_amm_contract_with_fee(10000);
+
+    let amm = AMM::at(amm_address);
+    assert(env.view_public(amm.fee_rate()) == 10000, "fee_rate mismatch");
+}
+
+// above 10000, get_amount_out would underflow on (10000 - fee_rate) and brick every swap,
+// so the constructor rejects it.
+#[test(should_fail_with = "fee_rate must be <= 10000")]
+unconstrained fn test_constructor_fee_rate_too_high() {
+    let _ = utils::deploy_amm_contract_with_fee(10001);
+}

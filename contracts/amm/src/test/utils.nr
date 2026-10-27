@@ -12,6 +12,11 @@ global TRANSFER_NONCE: Field = 1;
 // ----- deploy ----- //
 // ------------------ //
 pub unconstrained fn deploy_amm_contract() -> (TestEnvironment, AztecAddress, AztecAddress, AztecAddress, AztecAddress, AztecAddress, AztecAddress) {
+    deploy_amm_contract_with_fee(300)
+}
+
+/// Same as deploy_amm_contract, but with a custom constructor fee_rate (parts-per-10000).
+pub unconstrained fn deploy_amm_contract_with_fee(fee_rate: u32) -> (TestEnvironment, AztecAddress, AztecAddress, AztecAddress, AztecAddress, AztecAddress, AztecAddress) {
     let mut env = TestEnvironment::new();
     let owner = env.create_contract_account();
     let user = env.create_contract_account();
@@ -41,7 +46,7 @@ pub unconstrained fn deploy_amm_contract() -> (TestEnvironment, AztecAddress, Az
     // deploy AMM with addresses of the above contracts
     let amm_address = env.deploy("@amm/AMM").with_public_initializer(
         owner,
-        AMM::interface().constructor(token0_address, token1_address, 300),
+        AMM::interface().constructor(token0_address, token1_address, fee_rate),
     );
 
     // deploy lp token

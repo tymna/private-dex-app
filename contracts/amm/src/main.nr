@@ -25,6 +25,9 @@ contract AMM {
     use token::Token;
 
     global MIN_LIQUIDITY: u128 = 1000;
+    // fee_rate is in parts-per-10000 (see get_amount_out); above this, 10000 - fee_rate underflows
+    // and every swap reverts.
+    global MAX_FEE_RATE: u32 = 10000;
 
     // ----- storage ----- //
     // ------------------- //
@@ -69,6 +72,7 @@ contract AMM {
     #[initializer]
     fn constructor(token0: AztecAddress, token1: AztecAddress, fee_rate: u32) {
         assert(token0 != token1, "token addresses must be different");
+        assert(fee_rate <= MAX_FEE_RATE, "fee_rate must be <= 10000");
 
         // lp_token is wired separately via set_lp_token (see storage comment).
         self.storage.config.initialize(Config { token0, token1, admin: self.msg_sender() });
